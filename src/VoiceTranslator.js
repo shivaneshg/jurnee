@@ -65,6 +65,16 @@ const VoiceTranslator = () => {
         >
           <option value="en-US">English (US)</option>
           <option value="hi-IN">Hindi</option>
+          <option value="ta-IN">Tamil</option>
+          <option value="te-IN">Telugu</option>
+          <option value="kn-IN">Kannada</option>
+          <option value="ml-IN">Malayalam</option>
+          <option value="mr-IN">Marathi</option>
+          <option value="bn-IN">Bengali</option>
+          <option value="gu-IN">Gujarati</option>
+          <option value="pa-IN">Punjabi</option>
+          <option value="or-IN">Odia</option>
+          <option value="as-IN">Assamese</option>
           <option value="fr-FR">French</option>
           <option value="es-ES">Spanish</option>
           <option value="de-DE">German</option>
@@ -112,6 +122,12 @@ const VoiceTranslator = () => {
           <option value="te">Telugu</option>
           <option value="kn">Kannada</option>
           <option value="ml">Malayalam</option>
+          <option value="mr">Marathi</option>
+          <option value="bn">Bengali</option>
+          <option value="gu">Gujarati</option>
+          <option value="pa">Punjabi</option>
+          <option value="or">Odia</option>
+          <option value="as">Assamese</option>
           <option value="fr">French</option>
           <option value="es">Spanish</option>
           <option value="de">German</option>
