@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import './App.css';
 import './GuideCard.css'; // Make sure this CSS is still relevant
-import { GuideContext, GuideProvider, useGuideContext } from './contexts/GuideContext';
+import GuideContext, { GuideProvider, useGuideContext } from './contexts/GuideContext';
+import './AvailableGuidesScreen.css';
 
 // Reusing your existing GuideCard component (if you want to adapt it)
 const GuideCard = ({ guide, onSelect }) => {
