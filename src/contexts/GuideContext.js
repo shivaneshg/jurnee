@@ -16,7 +16,7 @@ export const GuideProvider = ({ children }) => {
         profileImage: 'https://randomuser.me/api/portraits/men/32.jpg',
         rating: 4.8,
         bio: 'Experienced local guide with 5 years of experience showing tourists the hidden gems of the city.',
-        hourlyRate: 25,
+        hourlyRate: 250,
         gender: 'Male', // Make sure you have gender, age, languages, workingHours for the full profile
         age: 35,
         languages: ['English', 'Hindi'],
@@ -28,7 +28,7 @@ export const GuideProvider = ({ children }) => {
         profileImage: 'https://randomuser.me/api/portraits/women/44.jpg',
         rating: 4.9,
         bio: 'Food and culture expert, specializing in culinary tours and historical sites.',
-        hourlyRate: 30,
+        hourlyRate: 300,
         gender: 'Female',
         age: 28,
         languages: ['English', 'Spanish'],
@@ -40,9 +40,9 @@ export const GuideProvider = ({ children }) => {
         profileImage: 'https://randomuser.me/api/portraits/men/67.jpg',
         rating: 4.7,
         bio: 'Adventure guide specializing in outdoor activities and natural landmarks.',
-        hourlyRate: 28,
+        hourlyRate: 280,
         gender: 'Male',
-        age: 42,
+        age: 43,
         languages: ['English', 'Spanish', 'Portuguese'],
         workingHours: '8 AM - 4 PM'
       }
