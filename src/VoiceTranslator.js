@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import SpeechRecognition, { useSpeechRecognition } from 'react-speech-recognition';
 import axios from 'axios';
+import './index.css';
 
 const VoiceTranslator = () => {
   const [translatedText, setTranslatedText] = useState('');
@@ -15,27 +16,20 @@ const VoiceTranslator = () => {
   } = useSpeechRecognition();
 
   const startListening = () => {
-    SpeechRecognition.startListening({ 
-      continuous: true, 
-      language: sourceLang 
-    });
+    SpeechRecognition.startListening({ continuous: true, language: sourceLang });
   };
 
   const handleTranslate = async () => {
     if (!transcript) return alert("No speech detected!");
 
     try {
-      // Using MyMemory Translation API (free, no API key needed)
-      const response = await axios.get(
-        `https://api.mymemory.translated.net/get`,
-        {
-          params: {
-            q: transcript,
-            langpair: `${sourceLang.split('-')[0]}|${targetLang}`
-          }
+      const response = await axios.get(`https://api.mymemory.translated.net/get`, {
+        params: {
+          q: transcript,
+          langpair: `${sourceLang.split('-')[0]}|${targetLang}`
         }
-      );
-      
+      });
+
       if (response.data && response.data.responseData) {
         setTranslatedText(response.data.responseData.translatedText);
       } else {
@@ -51,132 +45,146 @@ const VoiceTranslator = () => {
     return <span>Your browser doesn't support speech recognition.</span>;
   }
 
+  const languageOptions = [
+    { code: "en-US", label: "English (US)" },
+    { code: "en-GB", label: "English (UK)" },
+    { code: "hi-IN", label: "Hindi" },
+    { code: "ta-IN", label: "Tamil" },
+    { code: "te-IN", label: "Telugu" },
+    { code: "kn-IN", label: "Kannada" },
+    { code: "ml-IN", label: "Malayalam" },
+    { code: "mr-IN", label: "Marathi" },
+    { code: "bn-IN", label: "Bengali" },
+    { code: "gu-IN", label: "Gujarati" },
+    { code: "pa-IN", label: "Punjabi" },
+    { code: "fr-FR", label: "French" },
+    { code: "es-ES", label: "Spanish" },
+    { code: "de-DE", label: "German" },
+    { code: "it-IT", label: "Italian" },
+    { code: "pt-PT", label: "Portuguese" },
+    { code: "ru-RU", label: "Russian" },
+    { code: "ja-JP", label: "Japanese" },
+    { code: "zh-CN", label: "Chinese (Simplified)" },
+    { code: "zh-TW", label: "Chinese (Traditional)" },
+    { code: "ar-SA", label: "Arabic" },
+    { code: "ko-KR", label: "Korean" },
+    { code: "th-TH", label: "Thai" },
+    { code: "vi-VN", label: "Vietnamese" },
+    { code: "id-ID", label: "Indonesian" },
+    { code: "ms-MY", label: "Malay" },
+    { code: "fil-PH", label: "Filipino" },
+    { code: "nl-NL", label: "Dutch" },
+    { code: "sv-SE", label: "Swedish" },
+    { code: "no-NO", label: "Norwegian" },
+    { code: "da-DK", label: "Danish" },
+    { code: "fi-FI", label: "Finnish" },
+    { code: "pl-PL", label: "Polish" },
+    { code: "tr-TR", label: "Turkish" },
+    { code: "el-GR", label: "Greek" },
+    { code: "he-IL", label: "Hebrew" },
+  ];
+
+  const targetOptions = languageOptions.map(({ code, label }) => ({
+    code: code.split('-')[0],
+    label,
+  }));
+
   return (
-    <div className="p-6 max-w-xl mx-auto">
-      <h1 className="text-2xl font-bold mb-4">🎤 Voice Translator</h1>
+    <div className="min-h-screen bg-gradient-to-br from-indigo-100 to-blue-200 p-4">
+      <div className="max-w-xl mx-auto bg-white p-6 rounded-xl shadow-md">
+        <h1 className="text-3xl font-bold text-center mb-6">👋 Greetings</h1>
 
-      <div className="mt-4">
-        <label htmlFor="sourceLang">Speak in:</label>
-        <select
-          id="sourceLang"
-          value={sourceLang}
-          onChange={(e) => setSourceLang(e.target.value)}
-          className="ml-2 border p-1"
-        >
-          <option value="en-US">English (US)</option>
-          <option value="en-GB">English (UK)</option>
-          <option value="hi-IN">Hindi</option>
-          <option value="ta-IN">Tamil</option>
-          <option value="te-IN">Telugu</option>
-          <option value="kn-IN">Kannada</option>
-          <option value="ml-IN">Malayalam</option>
-          <option value="mr-IN">Marathi</option>
-          <option value="bn-IN">Bengali</option>
-          <option value="gu-IN">Gujarati</option>
-          <option value="pa-IN">Punjabi</option>
-          <option value="fr-FR">French</option>
-          <option value="es-ES">Spanish</option>
-          <option value="de-DE">German</option>
-          <option value="it-IT">Italian</option>
-          <option value="pt-PT">Portuguese</option>
-          <option value="ru-RU">Russian</option>
-          <option value="ja-JP">Japanese</option>
-          <option value="zh-CN">Chinese (Simplified)</option>
-          <option value="zh-TW">Chinese (Traditional)</option>
-          <option value="ar-SA">Arabic</option>
-          <option value="ko-KR">Korean</option>
-          <option value="th-TH">Thai</option>
-          <option value="vi-VN">Vietnamese</option>
-          <option value="id-ID">Indonesian</option>
-          <option value="ms-MY">Malay</option>
-          <option value="fil-PH">Filipino</option>
-          <option value="nl-NL">Dutch</option>
-          <option value="sv-SE">Swedish</option>
-          <option value="no-NO">Norwegian</option>
-          <option value="da-DK">Danish</option>
-          <option value="fi-FI">Finnish</option>
-          <option value="pl-PL">Polish</option>
-          <option value="tr-TR">Turkish</option>
-          <option value="el-GR">Greek</option>
-          <option value="he-IL">Hebrew</option>
-        </select>
-      </div>
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">Detect Language:</label>
+          <select
+            value={sourceLang}
+            onChange={(e) => setSourceLang(e.target.value)}
+            className="w-full border p-2 rounded"
+          >
+            {languageOptions.map((lang) => (
+              <option key={lang.code} value={lang.code}>
+                {lang.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-      <div className="mt-4 flex">
-        <button
-          onClick={startListening}
-          className="bg-green-500 text-white px-4 py-2 rounded mr-2"
-        >
-          Start Listening
-        </button>
+        <div className="mb-6">
+          <label className="block font-semibold mb-1">Target Language:</label>
+          <select
+            value={targetLang}
+            onChange={(e) => setTargetLang(e.target.value)}
+            className="w-full border p-2 rounded"
+          >
+            {targetOptions.map((lang) => (
+              <option key={lang.code} value={lang.code}>
+                {lang.label}
+              </option>
+            ))}
+          </select>
+        </div>
 
-        <button
-          onClick={SpeechRecognition.stopListening}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Stop Listening
-        </button>
-      </div>
+        {listening && (
+          <div className="flex justify-center mb-4">
+            <svg
+              className="h-12 w-12 text-red-600 animate-ping"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M10 2a2 2 0 00-2 2v6a2 2 0 104 0V4a2 2 0 00-2-2zm-7 8a7 7 0 1014 0H17a5 5 0 01-10 0H3z" />
+            </svg>
+          </div>
+        )}
 
-      <div className="mt-4">
-        <p><strong>Detected Speech:</strong> {transcript}</p>
-      </div>
+        <div className="flex justify-between mb-6">
+          <button
+            onClick={startListening}
+            className="flex-1 bg-red-500 text-white px-4 py-2 rounded mr-2"
+          >
+            Start
+          </button>
+          <button
+            onClick={SpeechRecognition.stopListening}
+            className="flex-1 bg-red-500 text-white px-4 py-2 rounded ml-2"
+          >
+            Stop
+          </button>
+        </div>
 
-      <div className="mt-4">
-        <label htmlFor="targetLang">Translate to:</label>
-        <select
-          id="targetLang"
-          value={targetLang}
-          onChange={(e) => setTargetLang(e.target.value)}
-          className="ml-2 border p-1"
-        >
-          <option value="en">English</option>
-          <option value="hi">Hindi</option>
-          <option value="ta">Tamil</option>
-          <option value="te">Telugu</option>
-          <option value="kn">Kannada</option>
-          <option value="ml">Malayalam</option>
-          <option value="mr">Marathi</option>
-          <option value="bn">Bengali</option>
-          <option value="gu">Gujarati</option>
-          <option value="pa">Punjabi</option>
-          <option value="fr">French</option>
-          <option value="es">Spanish</option>
-          <option value="de">German</option>
-          <option value="it">Italian</option>
-          <option value="pt">Portuguese</option>
-          <option value="ru">Russian</option>
-          <option value="ja">Japanese</option>
-          <option value="zh">Chinese (Simplified)</option>
-          <option value="zh-TW">Chinese (Traditional)</option>
-          <option value="ar">Arabic</option>
-          <option value="ko">Korean</option>
-          <option value="th">Thai</option>
-          <option value="vi">Vietnamese</option>
-          <option value="id">Indonesian</option>
-          <option value="ms">Malay</option>
-          <option value="tl">Filipino/Tagalog</option>
-          <option value="nl">Dutch</option>
-          <option value="sv">Swedish</option>
-          <option value="no">Norwegian</option>
-          <option value="da">Danish</option>
-          <option value="fi">Finnish</option>
-          <option value="pl">Polish</option>
-          <option value="tr">Turkish</option>
-          <option value="el">Greek</option>
-          <option value="he">Hebrew</option>
-        </select>
-      </div>
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">Detected Speech:</label>
+          <textarea
+            readOnly
+            className="w-full border p-2 rounded min-h-[60px]"
+            value={transcript}
+          />
+        </div>
 
-      <button
-        onClick={handleTranslate}
-        className="mt-4 bg-blue-600 text-white px-4 py-2 rounded"
-      >
-        Translate
-      </button>
+        <div className="mb-4">
+          <label className="block font-semibold mb-1">Translated Text:</label>
+          <textarea
+            readOnly
+            className="w-full border p-2 rounded min-h-[60px]"
+            value={translatedText}
+          />
+        </div>
 
-      <div className="mt-4">
-        <p><strong>Translated Text:</strong> {translatedText}</p>
+        <div className="flex justify-between">
+          <button
+            onClick={resetTranscript}
+            className="bg-gray-600 text-white px-4 py-2 rounded"
+          >
+            Reset
+          </button>
+
+          <button
+            onClick={handleTranslate}
+            className="bg-blue-600 text-white px-4 py-2 rounded"
+          >
+            Translate
+          </button>
+        </div>
       </div>
     </div>
   );
