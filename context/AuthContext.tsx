@@ -28,13 +28,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   React.useEffect(() => {
-    const unsubscribe_auth = onAuthStateChanged(auth, (firebaseUser) => {
+    const unsubscribe_auth = onAuthStateChanged(auth, async (firebaseUser) => {
+      setLoading(true);
       if (firebaseUser) {
+        console.log("Auth state changed: User is logged in");
         setUser(firebaseUser);
       } else {
+        console.log("Auth state changed: User is not logged in");
         logout();
         setUser(null);
       }
+      setLoading(false);
     });
 
     return () => unsubscribe_auth();
@@ -48,7 +52,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         email,
         password
       );
-      console.log("User logged in successfully:", userCredential.user);
+      console.log("User logged in successfully,");
       return userCredential.user;
     } catch (error: any) {
       const errorCode = error.code;
