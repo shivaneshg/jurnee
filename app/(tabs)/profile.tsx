@@ -62,12 +62,12 @@ export default function ProfileScreen() {
               style={[styles.avatarContainer, { backgroundColor: tintColor }]}
             >
               <ThemedText style={styles.avatarText}>
-                {user?.name.charAt(0).toUpperCase() || "U"}
+                {user?.displayName?.charAt(0).toUpperCase() || "U"}
               </ThemedText>
             </View>
             <View style={styles.userInfoContainer}>
               <ThemedText style={styles.userName}>
-                {user?.name || "User"}
+                {user?.displayName || "User"}
               </ThemedText>
               <ThemedText style={styles.userEmail}>
                 {user?.email || "user@example.com"}
