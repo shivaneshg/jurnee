@@ -1,61 +1,45 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useAuth } from "@/context/AuthContext";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { router } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React from "react";
 import {
   Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StatusBar,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 
-export default function SignupScreen() {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+const SignUpPage = () => {
+  const [name, setName] = React.useState("");
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { signup, setUser } = useAuth();
 
-  const { signup } = useAuth();
-
-  const backgroundColor = useThemeColor(
-    { light: "#fff", dark: "#000" },
-    "background"
-  );
-  const textColor = useThemeColor({ light: "#000", dark: "#fff" }, "text");
-  const placeholderColor = useThemeColor(
-    { light: "#999", dark: "#666" },
-    "text"
-  );
-  const tintColor = useThemeColor(
-    { light: "#2e78b7", dark: "#4e98d7" },
-    "tint"
-  );
+  const textColor = "#222";
+  const placeholderColor = "#888";
+  const tintColor = "#007AFF";
 
   const handleSignup = async () => {
-    if (!name || !email || !password || !confirmPassword) {
-      alert("Please fill in all fields");
-      return;
-    }
-
-    if (password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
     setIsSubmitting(true);
-
     try {
-      await signup(name, email, password);
-      router.replace("/(tabs)");
-    } catch (error: any) {
-      alert("Signup failed. Please try again.");
+      if (password !== confirmPassword)
+        throw new Error("Passwords do not match");
+      if (!name || !email || !password)
+        throw new Error("Name, email, and password are required");
+      const user = await signup(name, email, password);
+      if (user) {
+        setUser(user);
+        router.push("/(tabs)/home");
+      } else setUser(null);
+    } catch (error) {
+      console.error("Signup error:", error);
     } finally {
       setIsSubmitting(false);
     }
@@ -64,9 +48,8 @@ export default function SignupScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[styles.container, { backgroundColor }]}
     >
-      <StatusBar style="auto" />
+      <StatusBar />
       <ScrollView
         contentContainerStyle={styles.scrollView}
         keyboardShouldPersistTaps="handled"
@@ -133,7 +116,7 @@ export default function SignupScreen() {
               onChangeText={setConfirmPassword}
               secureTextEntry
             />
-          </View>{" "}
+          </View>
           <TouchableOpacity
             style={[styles.button, { backgroundColor: tintColor }]}
             onPress={handleSignup}
@@ -142,7 +125,7 @@ export default function SignupScreen() {
             <ThemedText style={styles.buttonText}>
               {isSubmitting ? "Creating Account..." : "Create Account"}
             </ThemedText>
-          </TouchableOpacity>{" "}
+          </TouchableOpacity>
           <View style={styles.footerContainer}>
             <ThemedText style={styles.footerText}>
               Already have an account?{" "}
@@ -157,7 +140,7 @@ export default function SignupScreen() {
       </ScrollView>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -226,3 +209,5 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 });
+
+export default SignUpPage;

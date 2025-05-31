@@ -1,65 +1,51 @@
 import { ThemedText } from "@/components/ThemedText";
 import { useAuth } from "@/context/AuthContext";
-import { useThemeColor } from "@/hooks/useThemeColor";
 import { router } from "expo-router";
-import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React from "react";
 import {
   Image,
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  StatusBar,
   StyleSheet,
   TextInput,
   TouchableOpacity,
   View,
 } from "react-native";
 
-export default function LoginScreen() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
+const LoginPage = () => {
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const { login, setUser } = useAuth();
+  const tintColor = "#007AFF";
+  const textColor = "#222";
+  const placeholderColor = "#888";
 
-  const { login } = useAuth();
-
-  const backgroundColor = useThemeColor(
-    { light: "#fff", dark: "#000" },
-    "background"
-  );
-  const textColor = useThemeColor({ light: "#000", dark: "#fff" }, "text");
-  const placeholderColor = useThemeColor(
-    { light: "#999", dark: "#666" },
-    "text"
-  );
-  const tintColor = useThemeColor(
-    { light: "#2e78b7", dark: "#4e98d7" },
-    "tint"
-  );
-
-  const handleLogin = async () => {
-    if (!email || !password) {
-      alert("Please fill in all fields");
-      return;
-    }
-
+  async function handleLogin() {
     setIsSubmitting(true);
-
     try {
-      await login(email, password);
-      router.replace("/(tabs)");
-    } catch (error: any) {
-      alert("Login failed. Please check your credentials and try again.");
+      if (!email || !password) {
+        throw Error("Email and password are required");
+      }
+      const user = await login(email, password);
+      if (user) {
+        setUser(user);
+        router.push("/(tabs)/home");
+      } else setUser(null);
+    } catch (error) {
+      console.error("Login error:", error);
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }
 
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[styles.container, { backgroundColor }]}
     >
-      <StatusBar style="auto" />
+      <StatusBar />
       <ScrollView
         contentContainerStyle={styles.scrollView}
         keyboardShouldPersistTaps="handled"
@@ -106,7 +92,7 @@ export default function LoginScreen() {
 
           <TouchableOpacity
             style={styles.forgotPasswordLink}
-            onPress={() => router.push("/(auth)/forgot-password")}
+            onPress={() => {}}
           >
             <ThemedText
               style={[styles.forgotPasswordText, { color: tintColor }]}
@@ -139,7 +125,7 @@ export default function LoginScreen() {
       </ScrollView>
     </KeyboardAvoidingView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -216,3 +202,5 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
 });
+
+export default LoginPage;
