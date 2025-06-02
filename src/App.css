@@ -1,104 +1,116 @@
 /* General App Styles */
 body {
   margin: 0;
-  font-family: 'Arial', sans-serif; /* A clean, common font */
-  background-color: #f8f8f8; /* Light gray background */
+  /* Use a more modern and readable font stack */
+  font-family: 'Poppins', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f0f2f5; /* A slightly darker, modern light gray background */
+  color: #333;
 }
 
 .App {
   text-align: center;
-  padding: 20px;
+  padding: 30px; /* Slightly more padding */
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align content to the top */
-  box-sizing: border-box; /* Include padding in element's total width and height */
-  max-width: 600px; /* Constrain overall app width for mobile-like feel */
-  margin: 0 auto; /* Center the app container */
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 650px; /* Slightly wider for a better feel */
+  margin: 0 auto;
   background-color: #ffffff; /* White background for the main content area */
-  box-shadow: 0 0 15px rgba(0,0,0,0.05); /* Subtle shadow around the app area */
+  box-shadow: 0 4px 20px rgba(0,0,0,0.08); /* Stronger, more modern shadow */
+  border-radius: 12px; /* More rounded corners for the app container */
+  overflow-x: hidden; /* Prevent horizontal scroll on small devices */
 }
 
 h1 {
-  color: #333;
+  color: #1a3a60; /* Darker, sophisticated blue for main heading */
   margin-bottom: 30px;
-  font-size: 2.2em; /* Slightly smaller for mobile context */
-  font-weight: bold;
+  font-size: 2.8em; /* Larger, more impactful heading */
+  font-weight: 700; /* Bolder */
   width: 100%;
-  text-align: left; /* Align header to left */
+  text-align: center; /* Center align main title for prominence */
+  letter-spacing: -0.5px; /* Slight negative letter spacing for modern feel */
 }
 
 /* Find a Guide Button (Initial Screen) */
 .App > button {
-  background-color: #262EA3; /* Same as the app */
+  background-color: #4A90E2; /* A vibrant, appealing blue */
   color: white;
-  padding: 15px 30px;
+  padding: 18px 40px; /* Larger padding */
   border: none;
-  border-radius: 25px; /* More rounded */
-  font-size: 1.1em;
+  border-radius: 35px; /* Even more rounded, pill-like */
+  font-size: 1.2em; /* Larger font size */
+  font-weight: 600; /* Semibold */
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 4px 10px rgba(0, 123, 255, 0.3); /* Stronger shadow */
-  margin-top: 50px; /* Push down from title */
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 8px 15px rgba(74, 144, 226, 0.4); /* Stronger, colored shadow */
+  margin-top: 60px; /* More space from title */
+  letter-spacing: 0.5px;
+  outline: none; /* Remove outline on focus */
 }
 
 .App > button:hover {
-  background-color: #262EA3;
-  transform: translateY(-2px); /* Slight lift effect */
+  background-color: #3A7CCB; /* Slightly darker blue on hover */
+  transform: translateY(-3px); /* More pronounced lift effect */
+  box-shadow: 0 10px 20px rgba(74, 144, 226, 0.5);
 }
 
 /* Available Local Guides Screen */
 .available-guides-screen {
   width: 100%;
-  padding: 0; /* Already handled by .App padding */
-  margin-top: 20px;
+  padding: 0;
+  margin-top: 25px; /* Slightly more margin */
 }
 
 .available-guides-header {
-  font-size: 1.8em; /* Slightly smaller for screen title */
-  color: #333;
-  margin-bottom: 25px;
-  text-align: left; /* Aligns to left as in design */
-  padding-left: 10px; /* Small padding from edge */
+  font-size: 2.2em; /* More prominent screen title */
+  color: #1a3a60; /* Consistent dark blue for headers */
+  margin-bottom: 30px; /* More space below header */
+  text-align: left;
+  padding-left: 10px;
+  font-weight: 600;
+  border-bottom: 2px solid #e0e0e0; /* Subtle separator */
+  padding-bottom: 10px;
 }
 
 .guides-list {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Space between guide cards */
-  padding: 0 10px; /* Padding for the list itself */
+  gap: 20px; /* More space between guide cards */
+  padding: 0 10px;
 }
 
 .guide-card-list {
   display: flex;
   align-items: center;
-  padding: 15px;
+  padding: 20px; /* More padding inside card */
   border: 1px solid #e0e0e0;
-  border-radius: 10px;
+  border-radius: 15px; /* More rounded card corners */
   background-color: #fff;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* More subtle shadow */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* More subtle shadow */
   text-align: left;
+  position: relative; /* For potential absolute elements inside */
+  overflow: hidden; /* Ensures rounded corners clip content */
 }
 
 .guide-card-list:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  transform: translateY(-5px); /* Stronger lift effect */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .guide-card-list-profile {
-  width: 60px;
-  height: 60px;
+  width: 70px; /* Larger profile image */
+  height: 70px;
   border-radius: 50%;
   overflow: hidden;
-  margin-right: 15px;
-  flex-shrink: 0; /* Prevent image from shrinking */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #e6e6e6; /* Fallback for placeholder */
+  margin-right: 20px; /* More space */
+  flex-shrink: 0;
+  border: 3px solid #4A90E2; /* Accent border around profile image */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
 .guide-list-image {
@@ -115,7 +127,7 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 30px;
+  font-size: 35px; /* Larger placeholder icon */
   color: #888;
 }
 
@@ -123,86 +135,97 @@ h1 {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
+  gap: 4px; /* Smaller gap for compact info */
 }
 
 .guide-list-info p {
   margin: 0;
-  font-size: 0.9em;
+  font-size: 1em; /* Slightly larger base font for info */
   color: #555;
-  /* Make all text within guide-list-info bold */
-  font-weight: bold; /* NEW: Makes all text bold by default */
+  font-weight: 500; /* Medium weight, not too bold */
 }
 
-/* Specific styling for name/gender/rating if needed, but 'p' bold covers it */
 .guide-list-name {
-  font-size: 1.1em;
-  color: #333;
-  margin-bottom: 4px;
+  font-size: 1.3em; /* More prominent name */
+  color: #1a3a60; /* Dark blue for name */
+  margin-bottom: 5px;
+  font-weight: 700; /* Bolder name */
 }
 
 .guide-list-gender {
-  color: #666;
-  margin-bottom: 2px;
+  color: #777;
+  font-size: 0.9em; /* Slightly smaller for secondary info */
 }
 
 .guide-list-rating {
-  color: #262EA3;
-  font-size: 1m;
-}
-
-/* Guide Detail Screen */
-.guide-detail-screen {
-  width: 100%;
-  padding: 25px 20px;
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  box-sizing: border-box;
-  position: relative; 
-}
-
-
-.back-button {
-  align-self: flex-start;
-  background: none;
-  border: none;
-  color: #262EA3;
-  font-size: 1em;
-  cursor: pointer;
-  padding: 5px 10px;
-  border-radius: 5px;
-  transition: background-color 0.2s ease;
-  margin-bottom: 20px;
+  color: #FFA500; /* Orange/Gold color for rating */
+  font-size: 1.1em; /* Larger rating text */
+  font-weight: 700; /* Bold rating */
   display: flex;
   align-items: center;
   gap: 5px;
 }
 
+/* Optional: Add a star icon to rating if using fonts like FontAwesome */
+/* .guide-list-rating::before {
+  content: '⭐';
+  font-size: 0.9em;
+} */
+
+
+/* Guide Detail Screen */
+.guide-detail-screen {
+  width: 100%;
+  padding: 30px 25px; /* More padding */
+  background-color: #fff;
+  border-radius: 15px; /* Consistent rounded corners */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12); /* More prominent shadow */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.back-button {
+  align-self: flex-start;
+  background: none;
+  border: none;
+  color: #4A90E2; /* Consistent accent blue */
+  font-size: 1.05em; /* Slightly larger */
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  margin-bottom: 25px; /* More space */
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  text-decoration: none; /* Remove underline by default */
+}
+
 .back-button:hover {
-  background-color: #e9f5ff;
+  background-color: #e9f5ff; /* Lighter hover background */
+  color: #3A7CCB; /* Slightly darker blue on hover */
 }
 
 .guide-detail-header {
-  position: relative; /* Make it a positioning context for absolute rating */
+  position: relative;
   display: flex;
-  justify-content: center; /* Center the image within its flex item */
-  width: 100%; /* Take full width */
-  margin-bottom: 20px;
+  justify-content: center;
+  width: 100%;
+  margin-bottom: 30px; /* More space */
 }
 
 .guide-detail-image-container {
-  width: 120px;
-  height: 120px;
+  width: 150px; /* Larger detail image */
+  height: 150px;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-  border: 3px solid #f0f0f0;
-  /* NEW: Removed margin-left: auto and margin-right: auto;
-     The parent guide-detail-header with justify-content: center will center it. */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow for image */
+  border: 4px solid #4A90E2; /* Prominent accent border */
 }
 
 .guide-detail-image {
@@ -219,33 +242,31 @@ h1 {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 60px;
+  font-size: 70px; /* Larger placeholder icon */
   color: #888;
 }
 
 .guide-detail-rating-number {
-/* Guide Detail Screen */
-/* ... (keep all other styles in your App.css as they were) ... */
   position: absolute;
-  top: 15px;    /* Distance from the top edge of .guide-detail-screen */
-  right: 15px;   /* Distance from the right edge of .guide-detail-screen */
-  font-size: 1.4em; /* Keep the reduced font size */
-  font-weight: bold;
-  color: #262EA3;
-  background-color: rgba(255, 255, 255, 0.9);
-  padding: 5px 10px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  
+  top: 0px; /* Adjusted position to be slightly higher, near the top-right of image container */
+  right: 0px; /* Adjusted position */
+  background-color: #FFA500; /* Solid orange/gold for rating */
+  color: white;
+  padding: 8px 15px; /* More padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 1.6em; /* Larger font size */
+  font-weight: 700;
+  box-shadow: 0 4px 10px rgba(255, 165, 0, 0.4); /* Matching shadow */
+  border: 2px solid #FF8C00; /* Slightly darker orange border */
 }
 
 
 .guide-detail-name {
-  font-size: 2.2em;
-  font-weight: bold;
-  color: #333;
+  font-size: 2.5em; /* Larger, more impactful name */
+  font-weight: 700;
+  color: #1a3a60;
   margin-bottom: 25px;
-  text-align: left;
+  text-align: center; /* Center the name */
   width: 100%;
 }
 
@@ -253,92 +274,281 @@ h1 {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  margin-bottom: 25px;
+  gap: 12px; /* More space between info items */
+  margin-bottom: 30px;
+  padding: 0 15px; /* Inner padding for grid */
 }
 
 .guide-detail-info-grid p {
   margin: 0;
   text-align: left;
-  font-size: 1.1em;
+  font-size: 1.15em; /* Slightly larger info text */
   color: #444;
+  display: flex; /* Make info items flexible for alignment */
+  align-items: baseline;
 }
 
 .info-label {
-  font-weight: bold;
-  color: #222;
-  margin-right: 5px;
+  font-weight: 700; /* Bolder label */
+  color: #1a3a60; /* Dark blue for labels */
+  margin-right: 8px; /* More space */
+  flex-shrink: 0; /* Prevent label from shrinking */
 }
 
 .info-value {
   color: #555;
+  font-weight: 500;
 }
 
 .guide-detail-description {
   text-align: left;
   width: 100%;
   margin: 0;
-  font-size: 1em;
-  line-height: 1.6;
+  font-size: 1.05em; /* Slightly larger description text */
+  line-height: 1.7; /* Increased line height for readability */
   color: #666;
-  border-top: 1px solid #eee;
-  padding-top: 20px;
+  border-top: 1px solid #e0e0e0; /* Lighter, subtle border */
+  padding-top: 25px; /* More padding top */
+  margin-top: 15px; /* Space from info grid */
 }
 
 .book-now-button {
-  background-color: #262EA3; /* NEW: Dark blue for booking button */
+  background-color: #4CAF50; /* A friendly green for booking */
   color: white;
-  padding: 15px 40px;
+  padding: 18px 45px; /* Larger padding */
   border: none;
-  border-radius: 30px;
-  font-size: 1.2em;
+  border-radius: 35px; /* Pill-like */
+  font-size: 1.3em; /* Larger font */
+  font-weight: 700; /* Bolder */
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  margin-top: 30px;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  margin-top: 40px; /* More space */
   width: 90%;
-  max-width: 300px;
-  box-shadow: 0 4px 10px rgba(38, 46, 163, 0.4); /* Adjusted shadow color */
+  max-width: 350px;
+  box-shadow: 0 8px 20px rgba(76, 175, 80, 0.4); /* Green shadow */
+  letter-spacing: 0.5px;
+  outline: none;
 }
 
 .book-now-button:hover {
-  background-color: #1a2080; /* Slightly darker blue on hover */
-  transform: translateY(-3px);
+  background-color: #43A047; /* Slightly darker green on hover */
+  transform: translateY(-4px); /* More pronounced lift */
+  box-shadow: 0 10px 25px rgba(76, 175, 80, 0.5);
 }
 
-/* Optional: Basic Responsive Adjustments */
+/* Booking Form */
+.booking-form {
+  background-color: #f0f8ff; /* Very light blue background for form */
+  border: 1px solid #d0e8ff; /* Soft blue border */
+  border-radius: 12px;
+  padding: 25px; /* More padding */
+  margin-top: 30px; /* Space from button */
+  width: 95%; /* Wider form */
+  max-width: 400px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 18px; /* More space between form groups */
+  text-align: left;
+}
+
+.booking-form h3 {
+  text-align: center;
+  color: #1a3a60; /* Dark blue for form header */
+  margin-top: 0;
+  margin-bottom: 20px;
+  font-size: 1.6em; /* Larger form title */
+  font-weight: 600;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* More space between label and input */
+}
+
+.form-group label {
+  font-weight: 600; /* Semibold label */
+  color: #333;
+  font-size: 1em;
+}
+
+.form-group input[type="time"],
+.form-group input[type="text"] {
+  padding: 12px 15px; /* More padding inside inputs */
+  border: 1px solid #a0c4ff; /* Soft blue border for inputs */
+  border-radius: 8px; /* More rounded inputs */
+  font-size: 1.05em; /* Slightly larger font in inputs */
+  width: calc(100% - 30px); /* Account for padding */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.08); /* Subtle inner shadow */
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none; /* Remove default outline */
+}
+
+.form-group input[type="time"]:focus,
+.form-group input[type="text"]:focus {
+  border-color: #4A90E2; /* Accent blue on focus */
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.2); /* Soft blue glow on focus */
+}
+
+.confirm-booking-button {
+  background-color: #4CAF50; /* Green for confirm */
+  color: white;
+  padding: 14px 25px; /* More padding */
+  border: none;
+  border-radius: 30px; /* Rounded */
+  font-size: 1.15em; /* Larger font */
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 15px; /* More space */
+  font-weight: 600;
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.3);
+  outline: none;
+}
+
+.confirm-booking-button:hover {
+  background-color: #43A047; /* Darker green on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(76, 175, 80, 0.4);
+}
+
+.cancel-booking-button {
+  background-color: #f44336; /* Red for cancel */
+  color: white;
+  padding: 12px 25px; /* More padding */
+  border: none;
+  border-radius: 30px;
+  font-size: 1.05em;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  margin-top: 10px;
+  font-weight: 500;
+  box-shadow: 0 4px 10px rgba(244, 67, 54, 0.3);
+  outline: none;
+}
+
+.cancel-booking-button:hover {
+  background-color: #da190b; /* Darker red on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(244, 67, 54, 0.4);
+}
+
+/* Responsive Adjustments */
 @media (max-width: 480px) {
   .App {
     padding: 15px;
+    border-radius: 0; /* Remove border-radius on very small screens for full width */
+    box-shadow: none; /* Remove shadow on very small screens */
   }
   h1 {
-    font-size: 2em;
+    font-size: 2.2em;
+    margin-bottom: 25px;
   }
-  .available-guides-screen,
-  .guide-detail-screen {
-    padding: 15px;
+  .App > button {
+    padding: 15px 30px;
+    font-size: 1em;
+    margin-top: 40px;
+  }
+  .available-guides-header {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+  .guides-list {
+    gap: 15px;
+    padding: 0 5px;
   }
   .guide-card-list {
-    padding: 12px;
+    padding: 15px;
+    border-radius: 10px;
   }
-  .guide-list-image {
-    width: 50px;
-    height: 50px;
+  .guide-card-list-profile {
+    width: 55px;
+    height: 55px;
+    margin-right: 15px;
+  }
+  .guide-list-image-placeholder {
+    font-size: 28px;
   }
   .guide-list-info p {
-    font-size: 0.85em;
+    font-size: 0.9em;
+  }
+  .guide-list-name {
+    font-size: 1.1em;
+  }
+  .guide-list-rating {
+    font-size: 1em;
+  }
+  .guide-detail-screen {
+    padding: 20px 15px;
+    border-radius: 10px;
+  }
+  .back-button {
+    font-size: 0.95em;
+    margin-bottom: 15px;
+    padding: 6px 10px;
   }
   .guide-detail-image-container {
     width: 100px;
     height: 100px;
   }
-  .guide-detail-name {
-    font-size: 2em;
+  .guide-detail-image-placeholder {
+    font-size: 50px;
   }
   .guide-detail-rating-number {
-    font-size: 1.8em;
+    font-size: 1.2em;
+    padding: 6px 10px;
+    top: -5px; /* Adjust for smaller screens */
+    right: -5px; /* Adjust for smaller screens */
+  }
+  .guide-detail-name {
+    font-size: 2em;
+    margin-bottom: 20px;
+  }
+  .guide-detail-info-grid {
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 0 10px;
+  }
+  .guide-detail-info-grid p {
+    font-size: 1em;
+  }
+  .info-label {
+    margin-right: 5px;
+  }
+  .guide-detail-description {
+    font-size: 0.95em;
+    padding-top: 15px;
+    margin-top: 10px;
   }
   .book-now-button {
     font-size: 1.1em;
-    padding: 12px 30px;
+    padding: 15px 35px;
+    margin-top: 30px;
+  }
+  .booking-form {
+    padding: 20px;
+    margin-top: 20px;
+    gap: 12px;
+  }
+  .booking-form h3 {
+    font-size: 1.3em;
+    margin-bottom: 15px;
+  }
+  .form-group label {
+    font-size: 0.9em;
+  }
+  .form-group input[type="time"],
+  .form-group input[type="text"] {
+    padding: 10px 12px;
+    font-size: 0.95em;
+    width: calc(100% - 24px);
+  }
+  .confirm-booking-button {
+    padding: 10px 20px;
+    font-size: 1em;
+  }
+  .cancel-booking-button {
+    padding: 8px 20px;
+    font-size: 0.9em;
   }
 }

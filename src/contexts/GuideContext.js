@@ -1,30 +1,30 @@
 // src/contexts/GuideContext.js
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useContext, useCallback } from 'react'; // Import useCallback
 
 const GuideContext = createContext();
 
 export const GuideProvider = ({ children }) => {
   const [guides, setGuides] = useState([]);
-  const [selectedGuide, setSelectedGuide] = useState(null); // This is good
+  const [selectedGuide, setSelectedGuide] = useState(null);
 
-  // Sample data to initialize our guides
-  const fetchGuides = () => {
+  // Use useCallback to memoize fetchGuides
+  const fetchGuides = useCallback(() => {
     const sampleGuides = [
       {
         id: '1',
-        name: 'John Smith',
+        name: 'John Smith ',
         profileImage: 'https://randomuser.me/api/portraits/men/32.jpg',
         rating: 4.8,
         bio: 'Experienced local guide with 5 years of experience showing tourists the hidden gems of the city.',
         hourlyRate: 250,
-        gender: 'Male', // Make sure you have gender, age, languages, workingHours for the full profile
+        gender: 'Male',
         age: 35,
         languages: ['English', 'Hindi'],
         workingHours: '9 AM - 5 PM'
       },
       {
         id: '2',
-        name: 'Sarah Johnson',
+        name: 'Sarah Johnson ',
         profileImage: 'https://randomuser.me/api/portraits/women/44.jpg',
         rating: 4.9,
         bio: 'Food and culture expert, specializing in culinary tours and historical sites.',
@@ -36,7 +36,7 @@ export const GuideProvider = ({ children }) => {
       },
       {
         id: '3',
-        name: 'Miguel Rodriguez',
+        name: 'Miguel Rodriguez ',
         profileImage: 'https://randomuser.me/api/portraits/men/67.jpg',
         rating: 4.7,
         bio: 'Adventure guide specializing in outdoor activities and natural landmarks.',
@@ -49,18 +49,18 @@ export const GuideProvider = ({ children }) => {
     ];
 
     setGuides(sampleGuides);
-  };
+  }, []); // <--- Empty dependency array: fetchGuides will only be created once
 
-  // Function to select a guide
-  const selectGuide = (guideData) => { // CHANGED: Pass the whole guide object, not just ID
-    setSelectedGuide(guideData); // Directly set the selected guide
-  };
+  // Use useCallback to memoize selectGuide
+  const selectGuide = useCallback((guideData) => {
+    setSelectedGuide(guideData);
+  }, []); // <--- Empty dependency array: selectGuide will only be created once
 
   return (
     <GuideContext.Provider
       value={{
         guides,
-        selectedGuide, // Ensure selectedGuide is exposed
+        selectedGuide,
         fetchGuides,
         selectGuide
       }}

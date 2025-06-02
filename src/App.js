@@ -1,36 +1,9 @@
 // App.js
 import React, { useState, useEffect } from 'react';
-import './App.css'; // This is the only CSS file we need to import now
+import './App.css';
 import { useGuideContext, GuideProvider } from './contexts/GuideContext';
 
-// NOTE: You can now safely remove the entire GuideCard component definition
-// from this App.js file, as it's no longer used in the current UI flow.
-// If you want to keep it for future use (e.g., if you reintroduce it), that's fine,
-// but it's not needed for the current screens.
-/*
-const GuideCard = ({ guide, onSelect }) => {
-  const [expanded, setExpanded] = useState(false);
-
-  const handleClick = () => {
-    setExpanded(!expanded);
-    onSelect(guide.id);
-  };
-
-  return (
-    <div className="guide-card" onClick={handleClick}>
-      <img src={guide.profileImage} alt={guide.name} className="guide-image" />
-      <h3 className="guide-name">{guide.name}</h3>
-      <div className="guide-rating">Rating: {guide.rating}/5</div>
-      {expanded && (
-        <div className="guide-details">
-          <p>{guide.bio}</p>
-          <span className="guide-price">${guide.hourlyRate}/hour</span>
-        </div>
-      )}
-    </div>
-  );
-};
-*/
+// (Keep GuideCard component commented out or remove it if not used)
 
 function AvailableGuidesScreen({ onGuideSelect }) {
   const { guides } = useGuideContext();
@@ -61,18 +34,41 @@ function AvailableGuidesScreen({ onGuideSelect }) {
 }
 
 function GuideDetailScreen({ selectedGuide, onBack }) {
+  // === MOVE HOOKS HERE - BEFORE ANY CONDITIONAL RENDERING ===
+  const [showBookingForm, setShowBookingForm] = useState(false);
+  const [fromTime, setFromTime] = useState('');
+  const [toTime, setToTime] = useState('');
+
+  // Now, the conditional return comes AFTER the Hooks are guaranteed to be called.
   if (!selectedGuide) {
+    // Optionally, you might want to reset the form state here if the guide changes to null,
+    // though the parent component (`App`) already ensures `selectedGuide` is valid
+    // before rendering `GuideDetailScreen`.
     return <div>No guide selected</div>;
   }
 
   const handleBookNowClick = () => {
-    alert(`Booking initiated for ${selectedGuide.name}`);
-    // Implement booking logic later (e.g., show booking form, send data to backend)
+    setShowBookingForm(true); // Show the booking form
+  };
+
+  const handleSubmitBooking = (e) => {
+    e.preventDefault(); // Prevent default form submission behavior
+    if (!fromTime || !toTime) {
+      alert('Please enter both "from" and "to" times.');
+      return;
+    }
+    alert(`Booking confirmed for ${selectedGuide.name} from ${fromTime} to ${toTime}.`);
+    // Here you would typically send this booking data to a backend
+    // Reset form and hide it
+    setFromTime('');
+    setToTime('');
+    setShowBookingForm(false);
   };
 
   return (
     <div className="guide-detail-screen">
       <button onClick={onBack} className="back-button">Back to Guides</button>
+
       <div className="guide-detail-header">
         <div className="guide-detail-image-container">
           {selectedGuide.profileImage ? (
@@ -85,7 +81,7 @@ function GuideDetailScreen({ selectedGuide, onBack }) {
       </div>
 
       <h2 className="guide-detail-name">{selectedGuide.name}</h2>
-      
+
       <div className="guide-detail-info-grid">
         {selectedGuide.age && <p><span className="info-label">Age:</span> <span className="info-value">{selectedGuide.age}</span></p>}
         {selectedGuide.languages && <p><span className="info-label">Languages:</span> <span className="info-value">{selectedGuide.languages ? selectedGuide.languages.join(', ') : 'N/A'}</span></p>}
@@ -94,8 +90,38 @@ function GuideDetailScreen({ selectedGuide, onBack }) {
       </div>
 
       <p className="guide-detail-description"><span className="info-label">Description:</span> <span className="info-value">{selectedGuide.bio}</span></p>
-      
-      <button onClick={handleBookNowClick} className="book-now-button">BOOK NOW</button>
+
+      {!showBookingForm && (
+        <button onClick={handleBookNowClick} className="book-now-button">BOOK NOW</button>
+      )}
+
+      {showBookingForm && (
+        <form onSubmit={handleSubmitBooking} className="booking-form">
+          <h3>Confirm Your Booking Period</h3>
+          <div className="form-group">
+            <label htmlFor="fromTime">From:</label>
+            <input
+              type="time" // Use type="time" for time input, or type="text" for freeform
+              id="fromTime"
+              value={fromTime}
+              onChange={(e) => setFromTime(e.target.value)}
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="toTime">To:</label>
+            <input
+              type="time" // Use type="time" for time input, or type="text" for freeform
+              id="toTime"
+              value={toTime}
+              onChange={(e) => setToTime(e.target.value)}
+              required
+            />
+          </div>
+          <button type="submit" className="confirm-booking-button">Confirm Booking</button>
+          <button type="button" onClick={() => setShowBookingForm(false)} className="cancel-booking-button">Cancel</button>
+        </form>
+      )}
     </div>
   );
 }
@@ -111,7 +137,7 @@ function App() {
 
   const handleGuideFeatureClick = () => {
     setShowGuides(true);
-    selectGuide(null); 
+    selectGuide(null); // Clear selected guide when going to the list
     setSelectedGuideId(null);
   };
 
@@ -121,7 +147,7 @@ function App() {
   };
 
   const handleBackToGuides = () => {
-    selectGuide(null);
+    selectGuide(null); // Clear selected guide when going back
     setSelectedGuideId(null);
   };
 
