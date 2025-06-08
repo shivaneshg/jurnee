@@ -97,7 +97,9 @@ export default function TravelApp() {
       
       {/* Quick Actions */}
       <View style={styles.quickActionsContainer}>
-        <TouchableOpacity style={styles.quickActionItem}>
+        <TouchableOpacity style={styles.quickActionItem}
+          onPress={() => navigation.navigate('Guide')}
+        >
           <View style={styles.quickActionIconContainer}>
             <Ionicons name="person" size={24 * widthScale} color="#4B4B4B" />
           </View>
@@ -173,7 +175,7 @@ export default function TravelApp() {
           <Text style={styles.navText}>Home</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity style={styles.navItem}>
+        <TouchableOpacity style={styles.navItem} onPress={() => navigation.navigate('Trips')}>
           <FontAwesome5 name="walking" size={24 * widthScale} color="#000" />
           <Text style={styles.navText}>My trips</Text>
         </TouchableOpacity>
