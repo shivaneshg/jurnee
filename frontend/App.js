@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import TravelApp from './TravelApp';  // Make sure this file exists and exports a component
 import ChatScreen from './ChatScreen';
+import TranslateScreen from './TranslateScreen';
 const Stack = createNativeStackNavigator();
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={TravelApp} />
         <Stack.Screen name="Chat" component={ChatScreen} />
+        <Stack.Screen name="Translate" component={TranslateScreen}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

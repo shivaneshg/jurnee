@@ -111,7 +111,7 @@ export default function TravelApp() {
           <Text style={styles.quickActionText}>Offline Maps</Text>
         </TouchableOpacity>
         
-        <TouchableOpacity style={styles.quickActionItem}>
+        <TouchableOpacity style={styles.quickActionItem}onPress={() => navigation.navigate('Translate')}>
           <View style={styles.quickActionIconContainer}>
             <MaterialIcons name="translate" size={24 * widthScale} color="#4B4B4B" />
           </View>
@@ -190,9 +190,9 @@ export default function TravelApp() {
         </TouchableOpacity>
         
         <TouchableOpacity style={styles.navItem} /* onPress disabled */ >
-  <MaterialIcons name="person" size={24 * widthScale} color="#000" />
-  <Text style={styles.navText}>Profile</Text>
-</TouchableOpacity>
+          <MaterialIcons name="person" size={24 * widthScale} color="#000" />
+          <Text style={styles.navText}>Profile</Text>
+        </TouchableOpacity>
 
 
       </View>
