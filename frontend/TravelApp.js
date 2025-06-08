@@ -13,13 +13,11 @@ import {
   Alert,
   ActivityIndicator
 } from 'react-native';
-import { 
-  Feather, 
-  Ionicons, 
-  MaterialIcons, 
-  FontAwesome5,
-  MaterialCommunityIcons
-} from '@expo/vector-icons';
+import Feather from '@expo/vector-icons/Feather';
+import Ionicons from '@expo/vector-icons/Ionicons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { useNavigation } from '@react-navigation/native';
 import * as Location from 'expo-location';

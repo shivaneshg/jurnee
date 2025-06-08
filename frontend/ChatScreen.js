@@ -14,12 +14,18 @@ import {
   Alert
 } from 'react-native';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { GEMINI_API_KEY } from '@env';
+
 
 const { width } = Dimensions.get('window');
 const baseWidth = 430;
 const widthScale = width / baseWidth;
 
-const GEMINI_API_KEY = 'AIzaSyBYMzJypwMBYIFF_bS9o8LSDl5eyrUVlsA'; // Your API key
+const headers = {
+  'Authorization': `Bearer ${GEMINI_API_KEY}`,
+  'Content-Type': 'application/json',
+};
+ // Your API key
 
 export default function ChatScreen() {
   const [messages, setMessages] = useState([

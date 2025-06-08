@@ -6,7 +6,9 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://192.168.109.3:5000/api';
+import { API_BASE } from '@env';
+
+const API_BASE_URL = API_BASE;
 
 export default function GuideLoginScreen({ navigation }) {
   const [email, setEmail] = useState('');

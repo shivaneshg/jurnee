@@ -15,8 +15,9 @@ import { Ionicons, MaterialIcons, FontAwesome5 } from '@expo/vector-icons';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import axios from 'axios';
 import { useFocusEffect } from '@react-navigation/native';
+import { API_BASE } from '@env';
 
-const API_BASE_URL = 'http://192.168.109.3:5000/api';
+const API_BASE_URL = API_BASE;
 
 export default function GuideScreen({ navigation }) {
   const [guides, setGuides] = useState([]);
