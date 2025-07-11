@@ -13,6 +13,9 @@ const bookingRoutes = require('./routes/bookingRoutes');
 
 app.use('/api/guides', guideRoutes);
 app.use('/api/bookings', bookingRoutes);
+app.get('/', (req, res) => {
+  res.send('Jurnee backend is live ✅');
+});
 
 // MongoDB Connection
 mongoose.connect(process.env.MONGODB_URI).then(() => {
