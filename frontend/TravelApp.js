@@ -53,7 +53,7 @@ export default function TravelApp() {
 
     const isAvailable = await SMS.isAvailableAsync();
     if (isAvailable) {
-      await SMS.sendSMSAsync(['+91987654321'], message);
+      await SMS.sendSMSAsync(['+918851891469'], message);
       Alert.alert('SOS Sent!', 'Your emergency message was sent successfully.');
     } else {
       Alert.alert('SMS Not Available', 'This device cannot send SMS messages.');
