@@ -22,7 +22,7 @@ const SignUpPage = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { signup, setUser } = useAuth();
 
-  const textColor = "#222";
+  const textColor = "#ffffff";
   const placeholderColor = "#888";
   const tintColor = "#007AFF";
 

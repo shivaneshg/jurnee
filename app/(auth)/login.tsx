@@ -20,7 +20,7 @@ const LoginPage = () => {
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { login, setUser } = useAuth();
   const tintColor = "#007AFF";
-  const textColor = "#222";
+  const textColor = "#ffffff";
   const placeholderColor = "#888";
 
   async function handleLogin() {
